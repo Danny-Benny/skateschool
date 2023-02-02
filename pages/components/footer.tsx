@@ -10,6 +10,7 @@ export default function GuestFooter() {
         position: "fixed",
         bottom: 0,
         height: "10%",
+        borderRadius: "15px 15px 0px 0px",
       }}
       component="footer"
       position="static"
@@ -38,7 +39,7 @@ export default function GuestFooter() {
           }}
         >
           <Typography variant="caption" color="initial">
-            Copyright ©2023. Limited
+            2023
           </Typography>
         </Box>
       </Container>

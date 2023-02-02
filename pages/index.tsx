@@ -1,13 +1,13 @@
+import * as React from "react";
 import { Container, Typography } from "@mui/material";
-import { Inter } from "@next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
+import HorizontalNonLinearStepper from "./components/stepper";
 
 export default function Home() {
   return (
     <>
       <Container maxWidth="xl">
         <Typography variant="h3">Content</Typography>
+        <HorizontalNonLinearStepper />
       </Container>
     </>
   );

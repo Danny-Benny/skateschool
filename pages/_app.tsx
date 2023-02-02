@@ -4,22 +4,39 @@ import { createTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import type { AppProps } from "next/app";
 import Navbar from "./components/navbar";
-import { alpha } from "@mui/material";
 import Color from "color";
 import GuestFooter from "./components/footer";
+import { forwardRef } from "react";
+import NextLink from "next/link";
+
+const LinkBehaviour = forwardRef(function LinkBehaviour(props, ref) {
+  //@ts-ignore
+  return <NextLink ref={ref} {...props} />;
+});
 
 const theme = createTheme({
   palette: {
     primary: {
-      // Purple and green play nicely together.
       main: "#9097C0",
     },
     secondary: {
-      // This is green.A700 as hex.
       main: "#11cb5f",
     },
     background: {
       default: Color("#BDC7FC").alpha(0.25).string(),
+    },
+  },
+  components: {
+    MuiLink: {
+      defaultProps: {
+        //@ts-ignore
+        component: LinkBehaviour,
+      },
+    },
+    MuiButtonBase: {
+      defaultProps: {
+        LinkComponent: LinkBehaviour,
+      },
     },
   },
 });

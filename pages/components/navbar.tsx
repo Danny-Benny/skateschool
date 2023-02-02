@@ -40,10 +40,13 @@ function Navbar() {
   };
 
   return (
-    <AppBar position="static" color="primary">
+    <AppBar
+      position="static"
+      color="primary"
+      sx={{ borderRadius: "0px 0 15px 15px" }}
+    >
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          {/* <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} /> */}
           <Image src="/logo.png" alt="logo" width={50} height={50} />
           <Typography
             variant="h6"
