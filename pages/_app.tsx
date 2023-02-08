@@ -3,9 +3,9 @@ import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import type { AppProps } from "next/app";
-import Navbar from "./components/navbar";
+import Navbar from "../components/navbar";
 import Color from "color";
-import GuestFooter from "./components/footer";
+import GuestFooter from "../components/footer";
 import { forwardRef } from "react";
 import NextLink from "next/link";
 
@@ -36,6 +36,13 @@ const theme = createTheme({
     MuiButtonBase: {
       defaultProps: {
         LinkComponent: LinkBehaviour,
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: "15px",
+        },
       },
     },
   },

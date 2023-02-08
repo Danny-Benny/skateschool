@@ -13,7 +13,7 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
-const pages = ["Domů", "Postup", "Blog"];
+const pages = ["Přehled triků", "Postup", "Blog"];
 const settings = ["Profil", "Nastavení", "Odhlásit se"];
 
 function Navbar() {

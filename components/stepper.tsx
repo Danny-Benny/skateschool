@@ -1,18 +1,22 @@
-import * as React from "react";
 import Box from "@mui/material/Box";
 import Stepper from "@mui/material/Stepper";
 import Step from "@mui/material/Step";
 import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import React from "react";
+
+interface Props {
+  trick: string;
+}
 
 const steps = [
   "Prohlédni si video",
-  "Podrobné vysvštlení",
+  "Podrobné vysvětlení",
   "Nahraj svůj pokus!",
 ];
 
-export default function HorizontalNonLinearStepper() {
+const HorizontalNonLinearStepper: React.FC<Props> = ({ trick }) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [completed, setCompleted] = React.useState<{
     [k: number]: boolean;
@@ -68,7 +72,7 @@ export default function HorizontalNonLinearStepper() {
         <iframe
           width="597"
           height="336"
-          src={`https://www.youtube.com/embed/Ux1gvUdFzgw`}
+          src={`https://www.youtube.com/embed/${trick}`}
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
@@ -93,60 +97,48 @@ export default function HorizontalNonLinearStepper() {
         {allStepsCompleted() ? (
           <React.Fragment>
             <Typography sx={{ mt: 2, mb: 1 }}>vše hotovo</Typography>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleReset}>Reset</Button>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <Button onClick={handleReset}>Resetovat</Button>
             </Box>
           </React.Fragment>
         ) : (
           <React.Fragment>
-            <Typography sx={{ mt: 2, mb: 1, py: 1 }}>
-              Krok {activeStep + 1}
-            </Typography>
+            {handleVideo()}
             <Box
               sx={{
-                padding: "24px 24px 20px 24px;",
-                borderRadius: "15px",
-                float: "left",
-                width: "597",
-                height: "336",
-                boxShadow: "10",
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
               }}
             >
-              {handleVideo()}
-            </Box>
-            <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
               <Button
-                color="inherit"
                 disabled={activeStep === 0}
                 onClick={handleBack}
-                sx={{ mr: 1 }}
+                sx={{ mr: 2 }}
               >
-                Zpatky
+                Zpět
               </Button>
-              <Box sx={{ flex: "1 1 auto" }} />
-              <Button onClick={handleNext} sx={{ mr: 1 }}>
-                Další
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleComplete}
+              >
+                {completedSteps() === totalSteps() - 1
+                  ? "Ukončit"
+                  : "Pokračovat"}
               </Button>
-              {activeStep !== steps.length &&
-                (completed[activeStep] ? (
-                  <Typography
-                    variant="caption"
-                    sx={{ display: "inline-block" }}
-                  >
-                    Krok {activeStep + 1} je hotový
-                  </Typography>
-                ) : (
-                  <Button onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1
-                      ? "Finish"
-                      : "Complete Step"}
-                  </Button>
-                ))}
             </Box>
           </React.Fragment>
         )}
       </div>
     </Box>
   );
-}
+};
+
+export default HorizontalNonLinearStepper;
