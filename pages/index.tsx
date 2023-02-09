@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Container, Grid } from "@mui/material";
 import TrickCard from "@/components/card";
 
-export default function Home() {
+const Home: React.FC = () => {
   return (
     <>
       <Container maxWidth="xl">
@@ -66,4 +66,6 @@ export default function Home() {
       </Container>
     </>
   );
-}
+};
+
+export default Home;

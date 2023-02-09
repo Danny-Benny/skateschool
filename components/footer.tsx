@@ -1,7 +1,7 @@
 import { AppBar, Box, Container, Typography } from "@mui/material";
 import Image from "next/image";
 
-export default function GuestFooter() {
+const GuestFooter: React.FC = () => {
   return (
     <AppBar
       sx={{
@@ -45,4 +45,6 @@ export default function GuestFooter() {
       </Container>
     </AppBar>
   );
-}
+};
+
+export default GuestFooter;

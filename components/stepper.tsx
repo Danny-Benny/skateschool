@@ -69,15 +69,29 @@ const HorizontalNonLinearStepper: React.FC<Props> = ({ trick }) => {
   const handleVideo = () => {
     if (activeStep === 0) {
       return (
-        <iframe
-          width="597"
-          height="336"
-          src={`https://www.youtube.com/embed/${trick}`}
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-          title="Embedded youtube"
-        />
+        <Box
+          sx={{
+            width: "657px",
+            height: "390px",
+            borderRadius: "15px",
+            boxShadow: "10",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: "20px",
+            marginTop: "20px",
+          }}
+        >
+          <iframe
+            width="597"
+            height="336"
+            src={`https://www.youtube.com/embed/${trick}`}
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+            title="Embedded youtube"
+          />
+        </Box>
       );
     }
   };
@@ -110,6 +124,7 @@ const HorizontalNonLinearStepper: React.FC<Props> = ({ trick }) => {
         ) : (
           <React.Fragment>
             {handleVideo()}
+
             <Box
               sx={{
                 display: "flex",

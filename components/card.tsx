@@ -25,7 +25,12 @@ const TrickCard: React.FC<Props> = (props) => {
             alt={props.trick_img_alt}
           />
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
+            <Typography
+              gutterBottom
+              variant="h5"
+              component="div"
+              sx={{ color: "#000" }}
+            >
               {props.title}
             </Typography>
             <Typography variant="body2" color="text.secondary">

@@ -16,7 +16,7 @@ import MenuItem from "@mui/material/MenuItem";
 const pages = ["Přehled triků", "Postup", "Blog"];
 const settings = ["Profil", "Nastavení", "Odhlásit se"];
 
-function Navbar() {
+const Navbar: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
     null
   );
@@ -170,5 +170,5 @@ function Navbar() {
       </Container>
     </AppBar>
   );
-}
+};
 export default Navbar;
