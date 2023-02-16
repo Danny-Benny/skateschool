@@ -5,6 +5,8 @@ import StepButton from "@mui/material/StepButton";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import React from "react";
+import { IconButton } from "@mui/material";
+import { PhotoCamera } from "@mui/icons-material";
 
 interface Props {
   trick: string;
@@ -96,9 +98,39 @@ const HorizontalNonLinearStepper: React.FC<Props> = ({ trick }) => {
     }
   };
 
+  const handleDescription = () => {
+    if (activeStep === 1)
+      return (
+        <Box>
+          <Typography>Sample text</Typography>
+        </Box>
+      );
+  };
+
+  const handleUpload = () => {
+    if (activeStep === 2) {
+      return (
+        <Box>
+          <Typography variant="h5">Nahraj svůj pokus! </Typography>
+          <Button variant="contained" component="label">
+            Nahraj
+            <input hidden accept="video/*" multiple type="file" />
+          </Button>
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="label"
+          >
+            <input hidden accept="video/*" type="file" />
+            <PhotoCamera />
+          </IconButton>
+        </Box>
+      );
+    }
+  };
   return (
     <Box sx={{ width: "100%" }}>
-      <Stepper nonLinear activeStep={activeStep}>
+      <Stepper nonLinear activeStep={activeStep} sx={{ paddingTop: "10px" }}>
         {steps.map((label, index) => (
           <Step key={label} completed={completed[index]}>
             <StepButton color="inherit" onClick={handleStep(index)}>
@@ -124,6 +156,8 @@ const HorizontalNonLinearStepper: React.FC<Props> = ({ trick }) => {
         ) : (
           <React.Fragment>
             {handleVideo()}
+            {handleDescription()}
+            {handleUpload()}
 
             <Box
               sx={{
