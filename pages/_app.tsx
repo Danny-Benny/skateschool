@@ -8,11 +8,15 @@ import Color from "color";
 import GuestFooter from "../components/footer";
 import { forwardRef } from "react";
 import NextLink from "next/link";
+import { getApolloClient } from "@/utility/apollo-client";
+import { ApolloProvider } from "@apollo/client";
 
 const LinkBehaviour = forwardRef(function LinkBehaviour(props, ref) {
   //@ts-ignore
   return <NextLink ref={ref} {...props} />;
 });
+
+const client = getApolloClient({ forceNew: false });
 
 const theme = createTheme({
   palette: {
@@ -48,15 +52,18 @@ const theme = createTheme({
     },
   },
 });
+
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Navbar />
-        <Component {...pageProps} />
-        <GuestFooter />
-      </ThemeProvider>
+      <ApolloProvider client={client}>
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Navbar />
+          <Component {...pageProps} />
+          <GuestFooter />
+        </ThemeProvider>
+      </ApolloProvider>
     </>
   );
 }

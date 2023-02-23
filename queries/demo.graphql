@@ -1,0 +1,10 @@
+query MyQuery {
+  githubUsers {
+    id
+    login
+    avatarUrl
+  }
+  users {
+    name
+  }
+}
