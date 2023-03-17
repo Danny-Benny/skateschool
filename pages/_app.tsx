@@ -7,6 +7,7 @@ import Navbar from "../components/navbar";
 import Color from "color";
 import GuestFooter from "../components/footer";
 import { forwardRef } from "react";
+import { AuthContextProvider } from "../components/authContextProvider";
 import NextLink from "next/link";
 import { getApolloClient } from "@/utility/apollo-client";
 import { ApolloProvider } from "@apollo/client";
@@ -56,14 +57,16 @@ const theme = createTheme({
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
-      <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Navbar />
-          <Component {...pageProps} />
-          <GuestFooter />
-        </ThemeProvider>
-      </ApolloProvider>
+      <AuthContextProvider>
+        <ApolloProvider client={client}>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Navbar />
+            <Component {...pageProps} />
+            <GuestFooter />
+          </ThemeProvider>
+        </ApolloProvider>
+      </AuthContextProvider>
     </>
   );
 }

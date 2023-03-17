@@ -13,8 +13,16 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 
-const pages = ["Přehled triků", "Postup", "Blog"];
-const settings = ["Profil", "Nastavení", "Odhlásit se"];
+const pages = [
+  { pageName: "Přehled triků" },
+  { pageName: "Postup" },
+  { pageName: "Blog" },
+];
+const settings = [
+  { pageSettings: "Profil" },
+  { pageSettings: "Nastavení" },
+  { pageSettings: "Odhlásit se" },
+];
 
 const Navbar: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -100,9 +108,9 @@ const Navbar: React.FC = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
+              {pages.map((page, index) => (
+                <MenuItem key={index} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">{page.pageName}</Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -126,13 +134,13 @@ const Navbar: React.FC = () => {
             SkateSchool
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
+            {pages.map((page, index) => (
               <Button
-                key={page}
+                key={index}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.pageName}
               </Button>
             ))}
           </Box>
@@ -159,9 +167,11 @@ const Navbar: React.FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
-                  <Typography textAlign="center">{setting}</Typography>
+              {settings.map((setting, index) => (
+                <MenuItem key={index} onClick={handleCloseUserMenu}>
+                  <Typography textAlign="center">
+                    {setting.pageSettings}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
