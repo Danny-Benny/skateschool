@@ -48,6 +48,18 @@ const resolvers = {
           description: "Prvni trik co se naucime",
           trick_img_alt: "ollie",
         },
+        {
+          id: "IK55jb8ebtw",
+          title: "Pop shove it",
+          description: "Druhy trik co se naucime",
+          trick_img_alt: "popshoveit",
+        },
+        {
+          id: "Yv_NXSEx_YY",
+          title: "Kickflip",
+          description: "Treti trik co se naucime",
+          trick_img_alt: "kickflip",
+        },
       ];
     },
     pages: () => {
