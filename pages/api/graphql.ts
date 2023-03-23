@@ -1,7 +1,12 @@
 import { createYoga, createSchema } from "graphql-yoga";
 import { gql } from "graphql-tag";
 import axios from "axios";
+import { verifyToken } from "@/server/verifyToken";
+import { DecodedIdToken } from "firebase-admin/lib/auth/token-verifier";
 
+type Context = {
+  user?: DecodedIdToken | undefined;
+};
 const typeDefs = gql`
   type Query {
     users: [User!]!
@@ -40,7 +45,7 @@ const resolvers = {
     users: () => {
       return [{ name: "Nextjs" }];
     },
-    card: () => {
+    card: (context: Context) => {
       return [
         {
           id: "Ux1gvUdFzgw",
@@ -102,4 +107,11 @@ export default createYoga({
   schema,
   // Needed to be defined explicitly because our endpoint lives at a different path other than `/graphql`
   graphqlEndpoint: "/api/graphql",
+  context: async (context) => {
+    const auth = context.request.headers.get("authorization");
+    console.log(auth);
+    return {
+      user: auth ? await verifyToken(auth) : undefined,
+    } as Context;
+  },
 });

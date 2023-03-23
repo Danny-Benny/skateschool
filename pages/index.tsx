@@ -2,6 +2,7 @@ import * as React from "react";
 import { useQuery, gql } from "@apollo/client";
 import { Box, Container, Grid } from "@mui/material";
 import TrickCard from "@/components/card";
+import { useAuthContext } from "@/components/authContextProvider";
 
 const GET_CARDS = gql`
   query {

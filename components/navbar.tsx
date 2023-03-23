@@ -12,6 +12,7 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useAuthContext } from "./authContextProvider";
 
 const pages = [
   { pageName: "Přehled triků" },
@@ -46,6 +47,7 @@ const Navbar: React.FC = () => {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+  const { user, loading } = useAuthContext();
 
   return (
     <AppBar
@@ -72,6 +74,7 @@ const Navbar: React.FC = () => {
             }}
           >
             SkateSchool
+            <p>ahoj {user?.email}</p>
           </Typography>
 
           <Box
