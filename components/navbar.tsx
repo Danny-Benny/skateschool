@@ -13,17 +13,20 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useAuthContext } from "./authContextProvider";
+import { useQuery, gql } from "@apollo/client";
 
-const pages = [
-  { pageName: "Přehled triků" },
-  { pageName: "Postup" },
-  { pageName: "Blog" },
-];
-const settings = [
-  { pageSettings: "Profil" },
-  { pageSettings: "Nastavení" },
-  { pageSettings: "Odhlásit se" },
-];
+const GET_DATA = gql`
+  query {
+    pages {
+      id
+      pageName
+    }
+    settings {
+      id
+      pageSettings
+    }
+  }
+`;
 
 const Navbar: React.FC = () => {
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(
@@ -49,6 +52,7 @@ const Navbar: React.FC = () => {
   };
   const { user, loading } = useAuthContext();
 
+  const { data } = useQuery(GET_DATA);
   return (
     <AppBar
       position="static"
@@ -74,7 +78,6 @@ const Navbar: React.FC = () => {
             }}
           >
             SkateSchool
-            <p>ahoj {user?.email}</p>
           </Typography>
 
           <Box
@@ -111,9 +114,11 @@ const Navbar: React.FC = () => {
                 display: { xs: "block", md: "none" },
               }}
             >
-              {pages.map((page, index) => (
-                <MenuItem key={index} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page.pageName}</Typography>
+              {data?.pages.map((pageName: any) => (
+                <MenuItem key={pageName.id} onClick={handleCloseNavMenu}>
+                  <Typography textAlign="center">
+                    {pageName.pageName}
+                  </Typography>
                 </MenuItem>
               ))}
             </Menu>
@@ -137,13 +142,13 @@ const Navbar: React.FC = () => {
             SkateSchool
           </Typography>
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page, index) => (
+            {data?.pages.map((pageName: any) => (
               <Button
-                key={index}
+                key={pageName.id}
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page.pageName}
+                {pageName.pageName}
               </Button>
             ))}
           </Box>
@@ -170,10 +175,10 @@ const Navbar: React.FC = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting, index) => (
-                <MenuItem key={index} onClick={handleCloseUserMenu}>
+              {data?.settings.map((pageSetting: any) => (
+                <MenuItem key={pageSetting.id} onClick={handleCloseUserMenu}>
                   <Typography textAlign="center">
-                    {setting.pageSettings}
+                    {pageSetting.pageSettings}
                   </Typography>
                 </MenuItem>
               ))}

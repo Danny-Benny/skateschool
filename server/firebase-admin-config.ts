@@ -21,4 +21,6 @@ if (admin.apps.length === 0) {
     credential: admin.credential.cert(firebaseAdminConfig),
   });
 }
-export const adminAuth = admin.auth;
+// export const adminAuth = admin.auth;
+// export const adminFirestore = admin.firestore;
+export const { firestore, auth: adminAuth } = admin;
